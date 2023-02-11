@@ -10,8 +10,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
 </head>
 <body>
-    <header>
-         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">School Management</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +20,20 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="Home" asp-action="Index" asp-controller="Home">Home</a>
+            <a class="nav-link" aria-current="Home" asp-action="Index" asp-controller="Home">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Courses">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Students">Students</a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Lecturers">Lecturers</a>
+          </li>   
+          <li class="nav-item">
             <a class="nav-link" asp-action="About" asp-controller="Home">About</a>
-          </li>       
+          </li>      
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -33,16 +42,17 @@
       </div>
     </div>
   </nav>
-  </header>
-  <main role="main">
+</header>
+  <main role="main" class="container mt-5 pb-2">
       @RenderBody()
   </main>
 
  <!-- FOOTER -->
-  <footer class="container">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2023 - NovaMettle &middot; <a href="#">About Us</a></p>
-  </footer>
+  <footer class="footer position-absolute bottom-0 w-100">
+      <div class="container">
+        <p class="text-muted text-center">&copy; 2023 - NovaMettle &middot; <a href="#">Back to top</a></p>
+      </div>
+    </footer>
    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
