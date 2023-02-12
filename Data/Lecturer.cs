@@ -10,4 +10,6 @@ public partial class Lecturer
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
+
+    public virtual ICollection<SchoolClass> SchoolClasses { get; } = new List<SchoolClass>();
 }
