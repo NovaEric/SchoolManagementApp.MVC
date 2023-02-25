@@ -1,0 +1,20 @@
+@model SchoolManagementApp.MVC.Models.UserProfileViewModel;
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="row text-center">
+    <div class="col-md-12">
+        <div class="row">
+            <h2 class="mb-5 text-decoration-underline text-primary" >@ViewData["Title"].</h2>
+
+            <div class="col">
+                <img src="@Model.ProfileImage"
+                     alt="" class="img-rounded img-responsive" />
+            </div>
+            <div class="col-12 text-success">
+                <h3>@Model.Name</h3>
+            </div>
+        </div>
+    </div>
+</div>

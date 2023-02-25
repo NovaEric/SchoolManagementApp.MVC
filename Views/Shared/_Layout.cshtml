@@ -23,23 +23,33 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="Home" asp-action="Index" asp-controller="Home">Home</a>
           </li>
+          @if (User.Identity.IsAuthenticated)
+          {            
+              <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Courses">Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Students">Students</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Lecturers">Lecturers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Enrollments">Enrollments</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="SchoolClasses">Classes</a>
+              </li>    
+          }
           <li class="nav-item">
-            <a class="nav-link" asp-action="Index" asp-controller="Courses">Courses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-action="Index" asp-controller="Students">Students</a>
-          </li>  
-          <li class="nav-item">
-            <a class="nav-link" asp-action="Index" asp-controller="Lecturers">Lecturers</a>
-          </li>   
-          <li class="nav-item">
-            <a class="nav-link" asp-action="About" asp-controller="Home">About</a>
-          </li>      
+             <a class="nav-link" asp-action="About" asp-controller="Home">About</a>
+          </li>    
         </ul>
-        <form class="d-flex">
+        @* <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> *@
+        <partial name="_LoginPartial"/>
       </div>
     </div>
   </nav>
