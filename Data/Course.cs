@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SchoolManagementApp.MVC.Data;
+﻿namespace SchoolManagementApp.MVC.Data;
 
 public partial class Course
 {

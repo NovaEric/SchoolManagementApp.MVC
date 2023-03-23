@@ -8,7 +8,7 @@ using SchoolManagementApp.MVC.Models;
 
 public class AccountController : Controller
 {
-    [Authorize]
+    
     public async Task Login(string returnUrl = "/")
     {
         var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
@@ -21,6 +21,7 @@ public class AccountController : Controller
         await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
     }
 
+    [Authorize]
     public IActionResult Profile()
     {
         return View(new UserProfileViewModel
