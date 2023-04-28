@@ -6,6 +6,6 @@ public class ClassEnrollmentViewModel
 {
     public SchoolClass? SchoolClass { get; set; }
 
-    public List<StudentEnrollmentViewModel> Enrollments { get; set; } = new List<StudentEnrollmentViewModel>();
+    public List<StudentEnrollmentViewModel> Students { get; set; } = new List<StudentEnrollmentViewModel>();
 
 }

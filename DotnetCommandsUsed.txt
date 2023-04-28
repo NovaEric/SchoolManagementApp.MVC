@@ -1,0 +1,18 @@
+dotnet run
+
+dotnet watch
+
+dotnet new gitignore
+
+dotnet run --launch-profile https
+
+dotnet add packages [Package]
+dotnet add package Auth0.AspNetCore.Authentication
+
+dotnet tool install --global dotnet-ef(Tool)
+
+dotnet ef dbcontext scaffold 'Server=localhost, 1400; Database=SchoolManagementDB; Trusted_Connection=false; MultipleActiveResultSets=true; Encrypt=false; user id=sa; password=Str0ngPa$$w0rd' Microsoft.EntityFrameworkCore.SqlServer -o Data -f --no-onconfiguring
+
+dotnet aspnet-codegenerator controller -name CoursesController -m Course -dc SchoolManagementDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+
+dotnet aspnet-codegenerator view ManageEnrollments Details -m ClassEnrollmentViewModel -outDir Views/SchoolClasses -f -udl

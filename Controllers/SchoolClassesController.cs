@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementApp.MVC.Data;
+using SchoolManagementApp.MVC.Models;
 
 namespace SchoolManagementApp.MVC.Controllers
 {
@@ -35,6 +36,7 @@ namespace SchoolManagementApp.MVC.Controllers
                 .Include(s => s.Course)
                 .Include(s => s.Lecture)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (schoolClass == null)
             {
                 return NotFound();
@@ -164,6 +166,58 @@ namespace SchoolManagementApp.MVC.Controllers
           return (_context.SchoolClasses?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+        public async Task<IActionResult> ManageEnrollments(int Id)
+        {
+            var SchoolClass = await _context.SchoolClasses
+                .Include(q => q.Course)
+                .Include(q => q.Lecture)
+                .Include(q => q.Enrollments)
+                    .ThenInclude(q => q.Student)
+                .FirstOrDefaultAsync(m => m.Id == Id);
+
+            var students = await _context.Students.ToListAsync();
+
+            var model = new ClassEnrollmentViewModel();
+            model.SchoolClass = SchoolClass;
+
+            foreach (var stu in students)
+            {
+                model.Students.Add(new StudentEnrollmentViewModel
+                {
+                    Id = stu.Id,
+                    FirstName = stu.FirstName,
+                    LastName = stu.LastName,
+                    isEnrolled = (SchoolClass?.Enrollments?.Any(q => q.StudentId == stu.Id)).GetValueOrDefault()
+            });
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnrollStudent(int classId, int studentId, bool shouldEnroll)
+        {
+            var enrollment = new Enrollment();
+            if (shouldEnroll)
+            {
+                enrollment.ClassId = classId;
+                enrollment.StudentId = studentId;
+                await _context.AddAsync(enrollment);
+            }
+            else
+            {
+                enrollment = await _context.Enrollments.FirstOrDefaultAsync(
+                    q => q.ClassId == classId && q.StudentId == studentId
+                );
+                if (enrollment != null)
+                {
+                    _context.Remove(enrollment);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(actionName: nameof(ManageEnrollments), new { Id = classId});
+        }
         private void CreateSelectList()
         {
              var courses = _context.Courses.Select(q => new
